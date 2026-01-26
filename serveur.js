@@ -27,6 +27,6 @@ const date = new Date();
 server.listen(3000, () => {
     console.log("Le serveur tourne sur le port 3000.");
     console.log(date.toLocaleDateString());
-    console.log(date.getHours());
+    console.log(`Il est ${date.getHours()} heure`);
 });   // Le serveur est disponible au port 3000
 
