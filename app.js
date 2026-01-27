@@ -29,6 +29,19 @@ app.use((req,res,next) => {
     next();
 });
 
+// J'ajoute un middleware qui gère la sécurité d'acces
+app.use((req,res,next) => {
+    // Je permet l'accès à mon API depuis n'importe quel origine avec (*) qui veut dire tout le monde
+    res.setHeader('Access-Control-Allow-Origin','*');
+   
+   // J'autorise certaines en-têtes dans les rêquetes reçues dans nottre API. Lees en-têtes autorisées 
+   // sont : 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    res.setHeader('Access-Control-Allow-Headers','Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+   // J'autorise d'envoyer des requêtes avec les méthodes : 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+    res.setHeader('Access-Control-Allow-Method', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    next();
+});
+
 // Je dessine mes Routes avec Express 
 
 app.use('/api/fruit', (req, res) => {
@@ -41,11 +54,17 @@ app.use('/api/fruit', (req, res) => {
             nom: "pomme",
             description: "fruit saisonier riche vitamin C",
             prix: 3
+        },
+        {
+            id: 2,
+            nom: "orange",
+            description: "originaire d'afrique du sud, produit en agriculture bio",
+            prix: 2.5
         }
     ];
 
     // En terme de réponse, je renvoie le tableau de fruits
-    res.json(fruit);
+    res.status(200).json(fruit);
 
 });
 
