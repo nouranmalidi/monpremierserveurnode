@@ -42,12 +42,12 @@ app.use((req,res,next) => {
     next();
 });
 
-// Je dessine mes Routes avec Express 
+// Je dessine mes Routes d'API avec Express avec la méthode GET (récupérer)route complète localhost: 3000/api/fruit
 
-app.use('/api/fruit', (req, res) => {
+app.get('/api/fruit', (req, res,next) => {
     console.log("Je passe dans la route /api/fruit")
     
-    // Mon fruit
+    // Mes tableaux de fruits
     const fruit = [
         {
             id: 1,
@@ -65,9 +65,25 @@ app.use('/api/fruit', (req, res) => {
 
     // En terme de réponse, je renvoie le tableau de fruits
     res.status(200).json(fruit);
-
+    next();
 });
 
+
+// Je créer ma route avec la méthode POST (créer,ajouter,insérer)
+app.post('/api/fruit', (req, res,next) => {
+    res.status(201).json({        // status 201 pour post
+        message: 'Méthode POST créé !'
+    });
+    next();
+});
+
+// Je créer ma route avec la méthode PUT (modifier)
+app.put('/api/fruit', (req, res) => {
+    res.status(200).json({
+        message: 'Méthode PUT créé !'
+    });
+
+});
 
 
 // J'exporte l'application express, ainsi l'app peut être importée dans d'autres fichiers JS.
